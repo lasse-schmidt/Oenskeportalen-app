@@ -1,0 +1,52 @@
+﻿@using Oenskeportalen.Services;
+@inject NavigationManager NavManager;
+@inject AppState AppState;
+
+	<div class="menu">
+		<ul>
+			@if (AppState.LoggedIn == false)
+			{
+				<li><a href="/">Forside</a></li>
+				<li><a href="tilmeld">Tilmeld</a></li>
+				<li><a href="login">Login</a></li>
+			}
+			@if (AppState.LoggedIn == true)
+			{
+				<li><a href="/oversigt/oversigt">Oversigt</a></li>
+				<li><a href="/oversigt/profil">Min Profil</a></li>
+				<li><a href="/oversigt/opretliste">Opret Ønskeliste</a></li>
+				<li><a href="/oversigt/delt">Delt Med Mig</a></li>
+			}
+			<li><a href="om">Om Os</a></li>
+			<li><a href="hjaelp">Hjælp</a></li>
+			@if (AppState.LoggedIn == true)
+			{
+				<li><a @onclick="Logout">Logud</a></li>
+			}
+		</ul>
+	</div>
+
+@code{
+	protected override void OnInitialized()
+	{
+		AppState.OnChange += StateHasChanged;
+	}
+
+	public void Dispose()
+	{
+		AppState.OnChange -= StateHasChanged;
+	}
+
+	private async void Logout()
+	{
+		AppState.LoggedIn = false;
+
+		NavManager.NavigateTo("/");
+
+		int secondsToVibrate = 1;
+		TimeSpan vibrationLength = TimeSpan.FromSeconds(secondsToVibrate);
+		Vibration.Default.Vibrate(vibrationLength);
+
+		this.StateHasChanged();
+	}
+}

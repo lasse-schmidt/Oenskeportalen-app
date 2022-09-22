@@ -1,0 +1,45 @@
+﻿@page "/tilmeld"
+@using Oenskeportalen.Models
+
+<div class="headline">
+	<h2>Tilmeld</h2>
+</div>
+
+<!--Register error message-->
+<div class="register-error">
+	<p>Email allerede i brug</p>
+</div>
+
+<!--Register form-->
+<EditForm Model="@registrationModel" OnValidSubmit="Submit">
+	<DataAnnotationsValidator />
+<div>
+	<label for="regname">Navn</label>
+	<input type="text" @bind-value="registrationModel.Name" name="regname" id="regname">
+	<ValidationMessage For="@(()=> registrationModel.Name)" />
+
+	<label for="regemail">Email</label>
+	<input type="email" @bind-value="registrationModel.Email" name="regemail" id="regemail">
+	<ValidationMessage For="@(()=> registrationModel.Email)" />
+
+	<label for="regpassword">Password</label>
+	<input type="password" @bind-value="registrationModel.Password" name="regpassword" id="regpassword">
+	<ValidationMessage For="@(()=> registrationModel.Password)" />
+	
+	<label for="regbirthday">Fødselsdag</label>
+		<input type="date" @bind-value="registrationModel.Birthday" name="regbirthday" id="regbirthday">
+	<ValidationMessage For="@(()=> registrationModel.Birthday)" />
+
+	<input type="submit" value="Opret">
+</div>
+</EditForm>
+
+@code {
+	RegistrationModel registrationModel = new();
+
+	private void Submit()
+	{
+
+	}
+}
+

@@ -1,0 +1,82 @@
+﻿@page "/login"
+@using Newtonsoft.Json
+@using Oenskeportalen.Models
+@using Oenskeportalen.Services
+@using System.Security.Claims
+@inject NavigationManager NavManager;
+@inject AppState AppState;
+
+<div class="headline">
+	<h2>Login</h2>
+</div>
+
+<!--Login error message-->
+<div class="login-error">
+	<p>Email eller Password matcher ikke</p>
+</div>
+
+<!--Login form-->
+<EditForm Model="@loginModel" OnValidSubmit="Submit">
+	<DataAnnotationsValidator />
+<div>
+	<label for="loginemail">Email</label>
+	<input type="email" @bind-value="loginModel.Email">
+	<ValidationMessage For="@(()=> loginModel.Email)" />
+
+	<label for="loginpassword">Password</label>
+	<input type="password" @bind-value="loginModel.Password">
+	<ValidationMessage For="@(()=> loginModel.Password)" />
+
+	<button type="submit" class="login-but">
+		<span class="@_spinnerClass" role="status" aria-hidden="true"i></span>
+		Login
+	</button>
+
+</div>
+</EditForm>
+
+<p class="forgot-password">Glemt password?</p>
+
+@code {
+	LoginModel loginModel = new();
+	private string _spinnerClass = "";
+	private async void Submit()
+	{
+		LoginService service = new LoginService();
+		_spinnerClass = "spinner-border spinner-border-sm";
+		var response = await service.CheckLoginIfExists(loginModel.Email, loginModel.Password);
+
+		if (response)
+		{
+			/*var tokenResponse = JsonConvert.DeserializeObject<AuthenticateRequestAndResponse>(response.Content.ToString());
+			//string id;
+			//string name;
+			//DateOnly birthday;
+			string email = loginModel.Email;
+			string password = loginModel.Password;
+			var userBasicDetail = new UserBasicDetail
+					{
+					Email = email,
+					Password = password,
+					//Name = name,
+					//Birthday = birthday,
+					//Id = id
+				};*/
+
+			//string userBasicInfoStr = JsonConvert.SerializeObject(userBasicDetail);
+			AppState.LoggedIn = true;
+			NavManager.NavigateTo("/oversigt/Oversigt");
+		}
+		else
+		{
+			int secondsToVibrate = 1;
+			TimeSpan vibrationLength = TimeSpan.FromSeconds(secondsToVibrate);
+			Vibration.Default.Vibrate(vibrationLength);
+            await App.Current.MainPage.DisplayAlert("Oops", "wrong credentials", "OK");
+        }
+
+        _spinnerClass = "";
+        this.StateHasChanged();
+
+	}
+}

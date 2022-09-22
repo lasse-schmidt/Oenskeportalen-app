@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+	<base href="/" />
+	<link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+	<link href="css/app.css" rel="stylesheet" />
+	<link href="MauiApp1.styles.css" rel="stylesheet" />
+
+	<!--Title-->
+	<title>Ønskeportalen</title>
+
+	<!--Favicon-->
+	<link rel="icon" type="image/png" href="gfx/favicon.png">
+
+	<!--Reset css-->
+	<link rel="stylesheet" type="text/css" href="css/reset.css" />
+
+	<!--Google font Niconne-->
+	<link href="https://fonts.googleapis.com/css2?family=Niconne&display=swap" rel="stylesheet">
+
+	<!--Google font Roboto Slab-->
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+
+	<!--Style css-->
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+
+	<!--Jquery lib-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+	<!--Fontawesome-->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+	<header class="main-header">
+
+		<!--Logo-->
+		<div class="logo">
+			<a href="/">
+				<img src="gfx/favicon.png" alt="Ønskeportalen logo" />
+				<h1>Ønskeportalen</h1>
+			</a>
+		</div>
+
+		<!--Navigator-->
+		<nav class="main-navigator">
+			<ul>
+				<li class="register-btn"> <a href="tilmeld">tilmeld</a></li>
+				<li class="login-btn"><a href="login">Login</a></li>
+				<li id="menu"><span class="fas fa-bars menu-icon"></span></li>
+			</ul>
+		</nav>
+	</header>
+
+	<!--Main-->
+	<main class="main-content">
+
+		<div id="app">Loading...</div>
+
+	</main>
+
+	<script src="_framework/blazor.webview.js" autostart="false"></script>
+
+	<!--Popup script-->
+	<script src="js/popup.js"></script>
+
+	<!--Login script-->
+	<script src="js/login_form_script.js"></script>
+
+	<!--Register script-->
+	<script src="js/register_form_script.js"></script>
+
+	<!--Menu script-->
+	<script src="js/menu.js"></script>
+
+	<!--Share script-->
+	<script src="js/share.js"></script>
+
+</body>
+
+</html>

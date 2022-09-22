@@ -1,0 +1,34 @@
+﻿@page "/oversigt/opret"
+
+<div class="headline">
+  <h2>Opret Ønske</h2>
+  <div>
+    <a href="oversigt/liste">Annuller</a>
+  </div>
+</div>
+
+<form>
+  <div>
+    <div>
+      <label for="wishname">Ønske navn</label>
+      <input type="text" name="wishname" id="wishname" required>
+
+      <label for="wishprice">Pris</label>
+      <input type="number" name="wishprice" id="wishprice">
+
+      <label for="wishlink">Link</label>
+      <input type="url" name="wishlink" id="wishlink">
+
+      <label for="description">Beskrivelse</label>
+      <textarea name="description" id="description"></textarea>
+    </div>
+
+    <div>
+      <label for="wishimg">Billede</label>
+      <input type="file" name="wishimg" id="wishimg" accept="image/*">
+
+    </div>
+  </div>
+
+  <input type="submit" value="Opret">
+</form>
